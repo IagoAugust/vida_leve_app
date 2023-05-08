@@ -2,25 +2,29 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { Avatar, Stack } from '@react-native-material/core';
 import { Header } from '../../components/Header';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { NewPacientes } from '../NewPacients';
+import {NewPatient} from '../NewPatient';
 
 export function Home() {
   const navigation = useNavigation();
+  function handleNewPatient() {
+    navigation.navigate('newPatient')
+  }
+
   return (
     <View>
       <Header title='Vida Leve' />
       <Stack center spacing={2} >
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('NewPacientes') }
+          onPress={handleNewPatient}
         >
           <Avatar icon={props => <Ionicons name="person-add" size={20} color="#000" />} size={35} color='#B3E5FC'  />
           <Text style={styles.buttonText}>Novo Paciente</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.button}
           onPress={() => { alert('Esse botão é de Meus Pacientes') }}
         >

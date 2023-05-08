@@ -1,9 +1,9 @@
 import React from "react";
 
-import { AppRoutes } from './src/routes';
+import { Routes } from './src/routes';
 
 export default function App() {
   return (
-      <AppRoutes/>
+      <Routes />
   );
 }
