@@ -13,7 +13,7 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/VidaLeve1.png')} style={styles.logo}/>
+      <Image source={require('../../assets/VidaLeve1.png')} style={styles.logo}/>
       <Text style={styles.title}>
         Vida Leve
       </Text>
