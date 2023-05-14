@@ -1,21 +1,52 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  button: {
-    marginTop: 30,
-    backgroundColor: "#F4F4F4",
+  cameraButton: {
+    width: 140,
+    height: 140,
+    marginTop: 35,
+    marginBottom: 20,
+
+    backgroundColor: '#b9b9b9',
+    borderRadius: 70,
     borderWidth: 1.5,
-    borderColor: "#C0C0C0",
-    borderRadius: 16,
-    width: 296,
-    height: 80,
-    alignItems: "center",
-    flexDirection: "row",
-    paddingLeft: 25,
+    borderColor: '#C0C0C0',
+    
+    alignItems: 'center',
+    justifyContent:'center',
+    alignSelf:'center'
   },
-  buttonText: {
-    fontSize: 20,
-    marginLeft: 10,
-    color: "#000",
+  button:{
+    backgroundColor: '#fff',
+    width: 79,
+    height: 40,
+    
+    borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: '#79747E',
+    
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginEnd: 20,
+    marginTop: 40,
+    marginBottom:120,
+  },
+  picker:{
+    height: 45,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginHorizontal: 20,
+    margin: 10,
+    borderRadius: 8,
+    marginTop: 5,
+    textAlign: 'center',
+    justifyContent:'center'
+  },
+  textPicker: {
+    marginTop: 10,
+    marginStart: 20,
+    fontSize: 18,
   }
 })
