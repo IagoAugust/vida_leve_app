@@ -1,10 +1,10 @@
 import React from "react";
 import { ScrollView, View, TextInput, FlatList, Text, TouchableOpacity } from "react-native";
 import { Header } from "../../components/Header";
-// import { Icon, TextInput } from "@react-native-material/core";
 import { AntDesign } from '@expo/vector-icons';
 import { styles } from "./styles";
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 const patients = [
     {
@@ -21,7 +21,18 @@ const patients = [
     }
 ];
 
+type detailsPatientType = {
+    id : number
+    name : string
+}
+
 export function ListPatients() {
+    const navigation = useNavigation();
+
+    function handleDetailsPatient(patient : detailsPatientType) {
+        navigation.navigate('detailsPatient', { name: patient.name, id: patient.id });
+    }
+
     return (
         <View>
             <Header title="Meus Pacientes" />
@@ -34,11 +45,10 @@ export function ListPatients() {
                     <AntDesign style={styles.iconSearch} name="search1" size={25} />
                 </View>
                 <FlatList 
-                    data={patients}
-                    // renderItem={({item}) => <Text style={styles.patientItem}>{item.name}</Text>}  
+                    data={patients}  
                     renderItem={({item}) => (
                         <View style={styles.containerList}>
-                            <TouchableOpacity style={styles.containerPatient}>
+                            <TouchableOpacity style={styles.containerPatient} onPress={() => handleDetailsPatient(item)}  >
                                 <Ionicons name="person" size={30} color="black" />
                                 <Text style={styles.patientText}>{item.name}</Text>
                             </TouchableOpacity>
@@ -46,7 +56,6 @@ export function ListPatients() {
                     )}  
                 />
             </ScrollView>
-
         </View>
     )
 }

@@ -6,6 +6,7 @@ export declare global {
       newPatient: undefined;
       calendar: undefined;
       listPatients: undefined;
+      detailsPatient: undefined;
     }
   }
 }
