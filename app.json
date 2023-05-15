@@ -2,6 +2,7 @@
   "expo": {
     "name": "Vida Leve",
     "slug": "vida_leve",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,13 +19,20 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#82B3C9"
-      }
+      },
+      "package": "com.sprgzr.vida_leve"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0344f336-f154-4c57-95ea-33c64e9f79d2"
+      }
     }
   }
 }
