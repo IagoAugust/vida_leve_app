@@ -12,6 +12,9 @@ export function Home() {
   function handleNewPatient() {
     navigation.navigate('newPatient');
   }
+  function handleListPatients(){
+    navigation.navigate('listPatients');
+  };
   function handleCalendar(){
     navigation.navigate('calendar');
   }
@@ -30,7 +33,7 @@ export function Home() {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => { alert('Esse botão é de Meus Pacientes') }}
+          onPress={handleListPatients}
         >
           <Avatar icon={props => <MaterialIcons name="people-alt" size={20} color="#000" />} size={35} color='#B3E5FC'  />
           <Text style={styles.buttonText}>Meus Pacientes</Text>
