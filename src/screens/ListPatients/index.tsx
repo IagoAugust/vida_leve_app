@@ -6,37 +6,71 @@ import { styles } from "./styles";
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
-const patients = [
-    {
-        id: 1,
-        name: 'Iago',
-    },
-    {
-        id: 2,
-        name: 'Otto',
-    },
-    {
-        id: 3,
-        name: 'Diogo',
-    }
-];
-
 type detailsPatientType = {
-    id : number
-    name : string
+    name: string;
+        id: number;
+        email: string;
+        age: number; 
+        gender: string;
+        phone: number;
+        cpf: number;
+        rg: number
 }
 
 export function ListPatients() {
     const navigation = useNavigation();
 
-    function handleDetailsPatient(patient : detailsPatientType) {
-        navigation.navigate('detailsPatient', { name: patient.name, id: patient.id });
+    const patients = [
+        {
+            id: 1,
+            name: 'Iago Matheus',
+            email: 'iagomateus@gamil.com',
+            phone: 19345659345,
+            gender: 'Masculino',
+            age: 20,
+            cpf: 25635869802,
+            rg: 51687946,
+        },
+        {
+            id: 2,
+            name: 'Otto Spreng',
+            email: 'pttpspreng@gmail.com',
+            phone: 19456794570,
+            gender: 'Masculino',
+            age: 29,
+            cpf: 35268469856,
+            rg: 15587156,
+        },
+        {
+            id: 3,
+            name: 'Diogo Batista',
+            email: 'diogobatista@gmail.com',
+            phone: 19485697643,
+            gender: 'Masculino',
+            age: 21,
+            cpf: 23558636815,
+            rg: 32165478,
+            
+        }
+    ];
+
+    function handleDetailsPatient({ id, name, email, gender, phone, age, cpf, rg  }: detailsPatientType) {
+        navigation.navigate('detailsPatient', {
+            id,
+            name,
+            email,
+            gender,
+            phone,
+            age,
+            cpf,
+            rg
+        });
     }
 
     return (
         <View>
             <Header title="Meus Pacientes" />
-            <ScrollView>
+            <>
                 <View style={styles.containerSearch}>
                     <TextInput 
                         style={styles.inputSearch}
@@ -55,7 +89,7 @@ export function ListPatients() {
                         </View>
                     )}  
                 />
-            </ScrollView>
+            </>
         </View>
     )
 }

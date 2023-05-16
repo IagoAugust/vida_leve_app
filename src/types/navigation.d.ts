@@ -6,7 +6,16 @@ export declare global {
       newPatient: undefined;
       calendar: undefined;
       listPatients: undefined;
-      detailsPatient: undefined;
+      detailsPatient: {
+        name: string;
+        id: number;
+        email: string;
+        age: number; 
+        gender: string;
+        phone: number;
+        cpf: number;
+        rg: number
+      };
     }
   }
 }
