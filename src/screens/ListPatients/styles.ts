@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 30,
     },
-    
+
     inputSearch: {
         width: '90%',
         height: 50,
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
 
         borderRadius: 15,
-        borderWidth: 1.5, 
+        borderWidth: 1.5,
         borderColor: 'gray',
 
         backgroundColor: '#F4F4F4',
@@ -33,13 +33,14 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         paddingVertical: 5,
+        borderRadius: 16
     },
 
     containerPatient : {
         width: '90%',
         height:56,
         backgroundColor: '#fff',
-        
+
         flexDirection: 'row',
         alignSelf:'center',
         alignItems: 'center',

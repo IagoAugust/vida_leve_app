@@ -13,7 +13,7 @@ export default function Login() {
   const navigation = useNavigation();
 
   function handleLogin() {
-    navigation.navigate('home')
+    navigation.navigate('signupRoutine');
   }
 
   function onAuthStateChanged(user: any) {
@@ -32,6 +32,7 @@ export default function Login() {
     const userSignIn = auth().signInWithCredential(googleCredential);
     userSignIn.then((user) => {
       console.log(JSON.stringify(user, null, 2));
+      navigation.navigate('signupRoutine');
     }).catch((error) => {
       console.log(error)
     });
@@ -85,7 +86,7 @@ export default function Login() {
       </Text>
 
       <Text style={styles.subtitle}>
-        Um produto da Escola de Saúde e Bem-estar
+        Um produto da Escola de Saúde e Bem-Estar
       </Text>
       <Spacer />
       <TouchableOpacity
