@@ -29,7 +29,8 @@ export const styles = StyleSheet.create({
 
     containerList : {
         width: '90%',
-        backgroundColor: '#DBDBDB',
+        backgroundColor: '#E1EBF3',
+
         justifyContent: 'center',
         alignSelf: 'center',
         paddingVertical: 5,
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
     containerPatient : {
         width: '90%',
         height:56,
-        backgroundColor: '#fff',
+        backgroundColor: '#EEEDED',
 
         flexDirection: 'row',
         alignSelf:'center',
