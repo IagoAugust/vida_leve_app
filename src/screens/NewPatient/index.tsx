@@ -29,13 +29,6 @@ export function NewPatient() {
   const handleSubmit = async () => {
     // Aqui você pode fazer o envio dos dados para o Firebase
     if ( name !== '' && age > 0 && email !== '' && phone !== '' && cpf !== '' && rg !== '' && gender !== '' ){
-      console.log(name,
-        age,
-        email,
-        phone,
-        cpf,
-        rg,
-        gender)
       firestore()
         .collection('patients')
         .add({
@@ -57,7 +50,7 @@ export function NewPatient() {
       <Header title='Novo Paciente' />
       <ScrollView>
         <TouchableOpacity style={styles.cameraButton} >
-          <Avatar icon={<Entypo name="camera" size={40} color="black"  />}color='#b9b9b9' />
+          <Avatar icon={<Entypo name="camera" size={40} color="black"  />} color='#b9b9b9' />
         </TouchableOpacity>
 
         <Input
