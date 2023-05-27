@@ -5,6 +5,8 @@ import {NewPatient} from '../screens/NewPatient';
 import { Calendar } from '../screens/Calendar';
 import { ListPatients } from '../screens/ListPatients';
 import { DetailsPatient } from '../screens/DetailsPatient';
+import { AnamnesisDetails } from '../screens/AnamnesisDetails';
+import { NewAnamnesis } from '../screens/NewAnamnesis';
 
 
 const {Navigator, Screen} = createNativeStackNavigator();
@@ -18,6 +20,8 @@ export function AppRoutes() {
       <Screen name='calendar' component={Calendar} />
       <Screen name='listPatients' component={ListPatients} />
       <Screen name='detailsPatient' component={DetailsPatient} initialParams={{name: '', id: 0}} />
+      <Screen name='anamnesisDetails' component={AnamnesisDetails} />
+      <Screen name='newAnamnesis' component={NewAnamnesis} />
     </Navigator>
   )
 }
