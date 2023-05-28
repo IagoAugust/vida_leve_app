@@ -17,6 +17,11 @@ export declare global {
         cpf: number;
         rg: number
       };
+      anamnesisDetails: {
+        id: number;
+        name: string;
+      };
+      newAnamnesis: undefined;
     }
   }
 }
