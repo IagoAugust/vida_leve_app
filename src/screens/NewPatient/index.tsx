@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import { View, TouchableOpacity, Text, ScrollView, Button } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView, Button, Alert } from 'react-native';
 import { Avatar, Icon, Stack } from '@react-native-material/core';
 import { Header } from '../../components/Header';
 import { Entypo } from '@expo/vector-icons';
@@ -7,8 +7,10 @@ import { styles } from './styles';
 import Input from '../../components/Input';
 import { Picker } from '@react-native-picker/picker';
 import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
 
 export function NewPatient() {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [age, setAge] = useState(0);
   const [email, setEmail] = useState('');
@@ -39,7 +41,16 @@ export function NewPatient() {
           cpf,
           rg,
           gender,
-        }).then(() => alert('Paciente criado com sucesso!')).catch((error) => console.log(error));
+        }).then(() => Alert.alert(
+          'Sucesso',
+        'Novo paciente criado com sucesso!',
+          [
+            {
+              text: 'Confirma',
+              onPress: () => navigation.goBack()
+            }
+          ]
+        )).catch((error) => console.log(error));
     } else{
       alert('Por favor, preencha todos os dados corretamente');
     }

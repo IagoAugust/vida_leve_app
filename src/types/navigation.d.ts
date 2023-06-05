@@ -1,3 +1,14 @@
+type Answers = {
+  [key: string]: string
+};
+
+type Anamnesis = {
+  name: string;
+  fieldId: string;
+  patientId: string;
+  answers: Answers;
+}
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -6,22 +17,19 @@ export declare global {
       home: undefined;
       newPatient: undefined;
       calendar: undefined;
-      listPatients: undefined;
-      detailsPatient: {
-        name: string;
-        id: number;
-        email: string;
-        age: number; 
-        gender: string;
-        phone: number;
-        cpf: number;
-        rg: number
+      patientList: undefined;
+      patientDetails: {
+        id: any;
       };
-      anamnesisDetails: {
-        id: number;
-        name: string;
+      anamnesisDetails: Anamnesis;
+      fieldSelection: {
+        id: string;
       };
-      newAnamnesis: undefined;
+      newAnamnesis: {
+        fieldName: string;
+        patientId: string;
+        fieldId: string;
+      }
     }
   }
 }

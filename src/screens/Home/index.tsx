@@ -13,8 +13,8 @@ export function Home() {
     navigation.navigate('newPatient');
   }
   function handleListPatients(){
-    navigation.navigate('listPatients');
-  };
+    navigation.navigate('patientList');
+  }
   function handleCalendar(){
     navigation.navigate('calendar');
   }
@@ -37,14 +37,6 @@ export function Home() {
         >
           <Avatar icon={props => <MaterialIcons name="people-alt" size={20} color="#000" />} size={35} color='#B3E5FC'  />
           <Text style={styles.buttonText}>Meus Pacientes</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-            style={styles.button}
-            onPress={handleCalendar}
-        >
-          <Avatar icon={props => <Entypo name="calendar" size={20} color="#000" />} size={35} color='#B3E5FC'  />
-          <Text style={styles.buttonText}>Agendamento</Text>
         </TouchableOpacity>
       </Stack>
     </View>

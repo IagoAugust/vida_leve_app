@@ -1,78 +1,118 @@
-import React, { useState } from "react";
-import { View, Text, ScrollView, Modal, TouchableOpacity } from "react-native";
-import { styles } from "./styles";
-import { Header } from "../../components/Header";
-import { Picker } from "@react-native-picker/picker";
+import React, {useEffect, useState} from "react";
+import {Alert, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {styles} from "./styles";
+import {Header} from "../../components/Header";
 import Input from "../../components/Input";
+import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
 
-export function NewAnamnesis() {
-    const [pickerArea, setPickerArea] = useState('');
-    const [questionValues, setQuestionValues] = useState<{ [key: string]: string }>({});
+type Question = {
+  fieldId: string;
+  id: string;
+  question: string;
+}
 
-    const handlePickerChange = (currentCurrency: any) => {
-        setPickerArea(currentCurrency);
+type Questions = Array<Question>
+
+type Answers = {
+  [key: string]: string
+};
+
+type Anamnesis = {
+  name: string;
+  fieldId: string;
+  patientId: string;
+  answers: Answers;
+}
+
+export function NewAnamnesis({route}: any) {
+  const [pickerArea, setPickerArea] = useState('');
+  const [questionValues, setQuestionValues] = useState<Answers>({});
+  const [questions, setQuestions] = useState<Questions>([]);
+
+  const patientIdx = route.params.patientId;
+  const fieldIdx = route.params.fieldId;
+  const {fieldName} = route.params;
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    firestore()
+      .collection('questions')
+      .where('fieldId', '==', fieldIdx)
+      .get()
+      .then((response) => {
+        const data: Array<any> = response.docs.map(doc => {
+          return {
+            id: doc.id,
+            ...doc.data()
+          }
+        })
+        // @ts-ignore
+        setQuestions(data);
+      })
+      .catch((error) => {
+        alert('Houve um erro carregando a lista de perguntas');
+        console.log(error);
+      });
+  },[])
+
+  const handleQuestionValueChange = (question: string, value: string) => {
+    setQuestionValues((prevQuestionValues) => ({
+      ...prevQuestionValues,
+      [question]: value,
+    }));
+  };
+
+  const handleSendValues = () => {
+    let data = new Date();
+    let dd = String(data.getDate()).padStart(2, '0');
+    let mm = String(data.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = data.getFullYear();
+    let today = dd + '/' + mm + '/' + yyyy;
+
+    let anamnese: Anamnesis = {
+      name: `${fieldName} - ${today}`,
+      fieldId: fieldIdx,
+      patientId: patientIdx,
+      answers: questionValues
     };
 
-    const handleQuestionValueChange = (question: string, value: string) => {
-        setQuestionValues((prevQuestionValues) => ({
-            ...prevQuestionValues,
-            [question]: value,
-        }));
-    };
-
-    const handleSendValues = () => {
-        // adicione o firebase aqui para enviar as perguntas
-        console.log(questionValues);
-    };
-
-    const question = [
-        { area: 'enfermagem', questions: ['Pressão Arterial', 'Frequência Cardíaca', 'Alergias', 'Queixa principal'] },
-        { area: 'fisioterapia', questions: ['Pressão Arterial', 'Frequência Cardíaca', 'Possui alguma dor'] },
-        { area: 'psicologia', questions: ['Atitude dos pais e familiares em relação à obesidade e à comida:', 'Identificação dos momentos do dia de maior ingestão, beliscos, voracidade alimentar: ', 'Investigação da síndrome da fome noturna: '] }
-    ];
-
-    const viewsInputs = (nameArea: string) => {
-        const areaSelected = question.find((area) => area.area === nameArea);
-        if (areaSelected) {
-            return areaSelected.questions.map((question, index) => (
-                <Input
-                    key={index}
-                    label={question}
-                    value={questionValues[question] || ''}
-                    onChangeText={(value) => handleQuestionValueChange(question, value)}
-                />
-            ));
+    firestore()
+      .collection('anamnesis')
+      .add(anamnese)
+      .then(() => Alert.alert(
+      'Sucesso',
+      'Novo anamnese criada com sucesso!',
+      [
+        {
+          text: 'Confirma',
+          // @ts-ignore
+          onPress: () => navigation.pop(2)
         }
-        return null;
-    };
+      ]
+    )).catch((error) => console.log(error));
+  };
 
-    return (
-        <View style={styles.container}>
-            <Header title="Nova Anamnese" />
-            <ScrollView>
-                <Text style={styles.textPicker}>Campo</Text>
-                <View style={styles.picker}>
-                    <Picker selectedValue={pickerArea} onValueChange={handlePickerChange}>
-                        <Picker.Item label="Selecione o tipo de área " value="" enabled={true} />
-                        <Picker.Item label="Enfermagem" value="enfermagem" />
-                        <Picker.Item label="Fisioterapia" value="fisioterapia" />
-                        <Picker.Item label="Psicologia" value="psicologia" />
-                        <Picker.Item label="Farmácia" value="Farmacia" />
-                        <Picker.Item label="Edução Física" value="edfisica" />
-                        <Picker.Item label="Nutrição" value="nutricao" />
-                    </Picker>
-                </View>
-                {   
-                    pickerArea !== '' && (
-                        <>
-                            {viewsInputs(pickerArea)}
-                            <TouchableOpacity style={styles.button} onPress={handleSendValues}>
-                                <Text>Enviar</Text>
-                            </TouchableOpacity>
-                        </>
-                    )
-                }
-            </ScrollView>
-        </View>
-    );
+
+  return (
+    <View style={styles.container}>
+      <Header title="Nova Anamnese" />
+      <ScrollView>
+
+        <>
+          {questions.map((question, index) => (
+            <Input
+              key={index}
+              label={question['question']}
+              value={questionValues[question['id']] || ''}
+              onChangeText={(answ) => handleQuestionValueChange(question['id'], answ)}
+            />
+          ))}
+          <TouchableOpacity style={styles.button} onPress={handleSendValues}>
+            <Text>Enviar</Text>
+          </TouchableOpacity>
+        </>
+      </ScrollView>
+    </View>
+  );
 }

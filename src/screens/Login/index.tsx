@@ -32,7 +32,7 @@ export default function Login() {
     const userSignIn = auth().signInWithCredential(googleCredential);
     userSignIn.then((user) => {
       console.log(JSON.stringify(user, null, 2));
-      navigation.navigate('signupRoutine');
+      navigation.navigate('home');
     }).catch((error) => {
       console.log(error)
     });
@@ -102,7 +102,7 @@ export default function Login() {
       <Text style={styles.loginInfo} >
         Cadastre-se com sua conta google da unifeob.
       </Text>
-      {user ? (logoutButton) : (nextScreen) }
+      {/*{user ? (logoutButton) : (nextScreen) }*/}
     </View>
   );
 }

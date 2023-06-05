@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     inputSearch: {
         width: '90%',
         height: 50,
-        marginTop: 50,
+        marginTop: 32,
         paddingLeft: 14,
         justifyContent: 'center',
         alignSelf: 'center',
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 
     },
     iconSearch: {
-        marginTop: 63,
+        marginTop: 44,
         marginLeft: -40,
     },
 
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         paddingVertical: 5,
-        borderRadius: 16
+        // borderRadius: 16
     },
 
     containerPatient : {
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
 
         borderWidth: 1,
         borderColor: '#3d3d3d',
-        borderRadius: 7,
+        borderRadius: 6,
 
 
     },
